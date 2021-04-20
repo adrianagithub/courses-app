@@ -9,6 +9,8 @@
         <th>Course</th>
         <th>Title</th>
         <th>Content</th>
+        <%# <th>Image</th> %>
+        <th class="h2" style="background:none;"><%= t ('Picture') %></th>
         <th colspan="3"></th>
       </tr>
     </thead>
@@ -19,6 +21,13 @@
           <td><%= lesson.course_id %></td>
           <td><%= lesson.title %></td>
           <td><%= lesson.content %></td>
+          <td data-title="Picture">
+            <figure class="picture is-128x128">
+            <% if lesson.picture.attached? %>
+              <%= image_tag(url_for(lesson.picture), size: 50) %>
+            <% end %>
+            </figure>
+          </td>
           <td><%= link_to 'Show', [@course, lesson], target: '_top' %></td>
           <td><%= link_to 'Edit', edit_course_lesson_path(@course, lesson), target: '_top' %></td>
           <td><%= link_to 'Destroy', [@course, lesson], method: :delete, data: { confirm: 'Are you sure?' }, target: '_top' %></td>

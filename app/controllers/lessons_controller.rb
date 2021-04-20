@@ -19,12 +19,14 @@ class LessonsController < ApplicationController
   # GET /lessons/1/edit
   def edit
   end
-
   # POST /lessons
   def create
     @lesson = @course.lessons.build(lesson_params)
 
     if @lesson.save
+      if params[:lesson][:picture].present? 
+        @service.picture.attach(params[:lesson][:picture])
+      end
       redirect_to [@course, @lesson], notice: 'Lesson was successfully created.'
     else
       render :new
@@ -34,6 +36,9 @@ class LessonsController < ApplicationController
   # PATCH/PUT /lessons/1
   def update
     if @lesson.update(lesson_params)
+      if params[:lesson][:picture].present?
+        @lesson.picture.attach(params[:lesson][:picture])
+      end
       redirect_to [@course, @lesson], notice: 'Lesson was successfully updated.'
     else
       render :edit
@@ -59,6 +64,6 @@ class LessonsController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def lesson_params
-      params.require(:lesson).permit(:title, :content)
+      params.require(:lesson).permit(:title, :content, :picture)
     end
 end

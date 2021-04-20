@@ -15,6 +15,15 @@
   <%= @lesson.content %>
 </p>
 
+<p>
+  <strong>Image:</strong>
+  <figure class="picture is-128x128">
+    <% if @lesson.picture.attached? %>
+      <%= image_tag(url_for(@lesson.picture), size: 50) %>  
+    <% end %>
+  </figure>
+</p> 
+
 <%= link_to 'Edit', edit_course_lesson_path(@course, @lesson) %> |
 <%= link_to 'Back', course_lessons_path(@course) %>
 
