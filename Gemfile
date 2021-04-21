@@ -54,3 +54,5 @@ end
 gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 gem 'turbo-rails'
 gem 'stimulus-rails'
+gem 'activestorage-validator'
+

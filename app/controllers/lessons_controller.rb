@@ -25,7 +25,10 @@ class LessonsController < ApplicationController
 
     if @lesson.save
       if params[:lesson][:picture].present? 
-        @service.picture.attach(params[:lesson][:picture])
+        @lesson.picture.attach(params[:lesson][:picture])
+      end
+      if params[:lesson][:document].present? 
+        @lesson.document.attach(params[:lesson][:document])
       end
       redirect_to [@course, @lesson], notice: 'Lesson was successfully created.'
     else
@@ -39,6 +42,10 @@ class LessonsController < ApplicationController
       if params[:lesson][:picture].present?
         @lesson.picture.attach(params[:lesson][:picture])
       end
+      if params[:lesson][:document].present?
+        @lesson.document.attach(params[:lesson][:document])
+      end
+
       redirect_to [@course, @lesson], notice: 'Lesson was successfully updated.'
     else
       render :edit
@@ -64,6 +71,6 @@ class LessonsController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def lesson_params
-      params.require(:lesson).permit(:title, :content, :picture)
+      params.require(:lesson).permit(:title, :content, :picture, :document)
     end
 end

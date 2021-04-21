@@ -24,6 +24,17 @@
   </figure>
 </p> 
 
+<p>
+  <strong>Document:</strong>
+  <td data-title="Document"><br>
+    <% if @lesson.document.attached? %>
+        <%= link_to "View File", @lesson.document %>
+        <br>
+        <%= link_to "Download File", @lesson.document, download: '' %> 
+    <% end %>
+  </td>
+</p>
+
 <%= link_to 'Edit', edit_course_lesson_path(@course, @lesson) %> |
 <%= link_to 'Back', course_lessons_path(@course) %>
 
