@@ -43,7 +43,8 @@
   <td data-title="Document"><br>
   <% if @lesson.documents.attached? %>
     <% @lesson.documents.each do |document| %> 
-      <%= image_tag document %> 
+    <%= link_to "Download File", @lesson.document, download: '' %>
+    <%# <%= image_tag document %>  
     <%end %>
   <%end%>
 </p>

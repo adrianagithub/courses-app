@@ -41,6 +41,7 @@ class LessonsController < ApplicationController
 
   # PATCH/PUT /lessons/1
   def update
+    # logic to create new documents array
     if @lesson.update(lesson_params)
       # if params[:lesson][:picture].present?
       #   @lesson.picture.attach(params[:lesson][:picture])
@@ -51,7 +52,6 @@ class LessonsController < ApplicationController
       # if params[:lesson][:documents].present?
       #   @lesson.document.attach(params[:lesson][:documents])
       # end
-
       redirect_to [@course, @lesson], notice: 'Lesson was successfully updated.'
     else
       render :edit

@@ -2,7 +2,6 @@
 
 <%= turbo_frame_tag 'course-lesson-list' do %>
   <h1>Lessons</h1>
-
   <table>
     <thead>
       <tr>
@@ -40,20 +39,20 @@
             <% end %>  
           <% end %>
           </td>
-
           <td data-title="Documents">
           <% if (lesson.documents.attached?) %> 
             <% lesson.documents.each do |document| %> 
-              <% if document.representable? %>
-              <%= image_tag(document.preview(resize_to_fit: [100,100])) %>
-              <%end%>
+              <%# <%byebug%> 
+              <%# <% if document.representable? %> 
+              <br>
+              <%= link_to "Download Files", lesson.document, download: '' %>
+              <%# <%= image_tag(document.preview(resize_to_fit: [100,100])) %> 
+              <br>
+              <%= link_to "View Files", lesson.document %> 
+              <%# <%end%> 
             <%end%>
           <%end%>
           </td>
-
-
-
-
           <td><%= link_to 'Show', [@course, lesson], target: '_top' %></td>
           <td><%= link_to 'Edit', edit_course_lesson_path(@course, lesson), target: '_top' %></td>
           <td><%= link_to 'Destroy', [@course, lesson], method: :delete, data: { confirm: 'Are you sure?' }, target: '_top' %></td>
