@@ -3,6 +3,7 @@ class Lesson < ApplicationRecord
   has_many :questions
   has_one_attached :picture
   has_one_attached :document
+  has_many_attached :documents
 
   validate :correct_document_mime_type
 
@@ -13,5 +14,9 @@ class Lesson < ApplicationRecord
       document.purge # delete the uploaded file
       errors.add(:document, 'Must be a PDF or a DOC file')
     end
+    # if documents.attached? && !documents.content_type.in?(%w(application/msword application/pdf))
+    #   documents.purge # delete the uploaded file
+    #   errors.add(:documents, 'Must be a PDF or a DOC file')
+    # end
   end
 end

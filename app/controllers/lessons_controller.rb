@@ -24,12 +24,15 @@ class LessonsController < ApplicationController
     @lesson = @course.lessons.build(lesson_params)
 
     if @lesson.save
-      if params[:lesson][:picture].present? 
-        @lesson.picture.attach(params[:lesson][:picture])
-      end
-      if params[:lesson][:document].present? 
-        @lesson.document.attach(params[:lesson][:document])
-      end
+      # if params[:lesson][:picture].present? 
+      #   @lesson.picture.attach(params[:lesson][:picture])
+      # end
+      # if params[:lesson][:document].present? 
+      #   @lesson.document.attach(params[:lesson][:document])
+      # end
+      # if params[:lesson][:documents].present? 
+      #   @lesson.document.attach(params[:lesson][:documents])
+      # end
       redirect_to [@course, @lesson], notice: 'Lesson was successfully created.'
     else
       render :new
@@ -39,12 +42,15 @@ class LessonsController < ApplicationController
   # PATCH/PUT /lessons/1
   def update
     if @lesson.update(lesson_params)
-      if params[:lesson][:picture].present?
-        @lesson.picture.attach(params[:lesson][:picture])
-      end
-      if params[:lesson][:document].present?
-        @lesson.document.attach(params[:lesson][:document])
-      end
+      # if params[:lesson][:picture].present?
+      #   @lesson.picture.attach(params[:lesson][:picture])
+      # end
+      # if params[:lesson][:document].present?
+      #   @lesson.document.attach(params[:lesson][:document])
+      # end
+      # if params[:lesson][:documents].present?
+      #   @lesson.document.attach(params[:lesson][:documents])
+      # end
 
       redirect_to [@course, @lesson], notice: 'Lesson was successfully updated.'
     else
@@ -71,6 +77,6 @@ class LessonsController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def lesson_params
-      params.require(:lesson).permit(:title, :content, :picture, :document)
+      params.require(:lesson).permit(:title, :content, :picture, :document, documents: [])
     end
 end

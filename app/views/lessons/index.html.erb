@@ -11,6 +11,7 @@
         <th class="h2" style="background:none;">Content</th>
         <th class="h2" style="background:none;">Picture</th>
         <th class="h2" style="background:none;">Document</th>
+        <th class="h2" style="background:none;">Documents (Array)</th>
         <th colspan="3"></th>
       </tr>
     </thead>
@@ -39,6 +40,19 @@
             <% end %>  
           <% end %>
           </td>
+
+          <td data-title="Documents">
+          <% if (lesson.documents.attached?) %> 
+            <% lesson.documents.each do |document| %> 
+              <% if document.representable? %>
+              <%= image_tag(document.preview(resize_to_fit: [100,100])) %>
+              <%end%>
+            <%end%>
+          <%end%>
+          </td>
+
+
+
 
           <td><%= link_to 'Show', [@course, lesson], target: '_top' %></td>
           <td><%= link_to 'Edit', edit_course_lesson_path(@course, lesson), target: '_top' %></td>
