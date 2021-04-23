@@ -21,8 +21,7 @@ class LessonsController < ApplicationController
   end
   # POST /lessons
   def create
-    @lesson = @course.lessons.build(lesson_params)
-
+    @lesson = @course.lessons.build(lesson_params) 
     if @lesson.save
       # if params[:lesson][:picture].present? 
       #   @lesson.picture.attach(params[:lesson][:picture])
@@ -49,9 +48,11 @@ class LessonsController < ApplicationController
       # if params[:lesson][:document].present?
       #   @lesson.document.attach(params[:lesson][:document])
       # end
-      # if params[:lesson][:documents].present?
-      #   @lesson.document.attach(params[:lesson][:documents])
-      # end
+      if params[:lesson][:documents].present?
+        byebug
+        @lesson.documents.attach(params[:lesson][:documents])
+        redirect_to [@course, @lesson], notice: 'Lesson was successfully updated.'
+      end
       redirect_to [@course, @lesson], notice: 'Lesson was successfully updated.'
     else
       render :edit

@@ -41,15 +41,21 @@
           </td>
           <td data-title="Documents">
           <% if (lesson.documents.attached?) %> 
-            <% lesson.documents.each do |document| %> 
-              <%# <%byebug%> 
-              <%# <% if document.representable? %> 
+            <% lesson.documents.each do |documents| %> 
+            <%# <% lesson.documents.filename %> 
+            <%# <%byebug %>
+              <% if documents.representable? %>
               <br>
-              <%= link_to "Download Files", lesson.document, download: '' %>
-              <%# <%= image_tag(document.preview(resize_to_fit: [100,100])) %> 
+              <%= image_tag(documents.preview(resize_to_fit: [100,100])) %>
               <br>
-              <%= link_to "View Files", lesson.document %> 
-              <%# <%end%> 
+              <%= link_to "Download Files", documents, download: ''  %>
+              <br>
+              <%= link_to "View Files", documents %> 
+              <%# <%= link_to "View Files", document  %>
+              <%# .where(user: Current.user).with_attached_photos %>
+              <%end %>
+
+              
             <%end%>
           <%end%>
           </td>
