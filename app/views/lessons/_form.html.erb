@@ -31,12 +31,23 @@
     <%= form.label :document %>
     <%= form.file_field :document %>
   </div>
+  
+   <p>
+    <% if @lesson.documents.attached? %>
+      <strong>Documents:</strong>
+      <td data-title="Document"><br>
+      <% @lesson.documents.each do |document| %> 
+      <%= link_to "Download File", document, download: '' %>
+      <%= image_tag document %>  
+      <%end %>
+    <%end%>
+    <div class="form-group col">
+      <%= form.label :documents %>
+      <%= form.file_field :documents, multiple: true %>
+    <div>
+  </p>
 
-  <div class="form-group col">
-    <%= form.label :documents %>
-    <%= form.file_field :documents, multiple: true %>
-  </div>
-
+  
   <div class="actions">
     <%= form.submit %>
   </div>

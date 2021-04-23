@@ -41,23 +41,26 @@ class LessonsController < ApplicationController
   # PATCH/PUT /lessons/1
   def update
     # logic to create new documents array
-    if @lesson.update(lesson_params)
+    if lesson_params[:documents]
+      @lesson.documents.attach(lesson_params[:documents])
+    end
+    if @lesson.update(lesson_params.except(:documents))
+      redirect_to [@course, @lesson], notice: 'Lesson was successfully updated.'
+    else
+      render :edit
+    end
+  end
       # if params[:lesson][:picture].present?
       #   @lesson.picture.attach(params[:lesson][:picture])
       # end
       # if params[:lesson][:document].present?
       #   @lesson.document.attach(params[:lesson][:document])
       # end
-      if params[:lesson][:documents].present?
-        byebug
-        @lesson.documents.attach(params[:lesson][:documents])
-        redirect_to [@course, @lesson], notice: 'Lesson was successfully updated.'
-      end
-      redirect_to [@course, @lesson], notice: 'Lesson was successfully updated.'
-    else
-      render :edit
-    end
-  end
+      # if params[:lesson][:documents].present?
+      #   byebug
+      #   @lesson.documents.attach(params[:lesson][:documents])
+      #   redirect_to [@course, @lesson], notice: 'Lesson was successfully updated.'
+      # end
 
   # DELETE /lessons/1
   def destroy
